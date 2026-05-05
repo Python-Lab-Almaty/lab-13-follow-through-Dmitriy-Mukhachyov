@@ -69,40 +69,6 @@
         false
       ],
       "max_points": 30
-    },
-    "level_3": {
-      "tasks": [
-        {
-          "id": "3.1",
-          "title": "Ускорение героя",
-          "description": "Добавь ускорение: при зажатии Shift скорость x2",
-          "hint": "Создай переменную boost и проверяй клавишу Shift",
-          "code_pattern": "onkey.*shift|Shift",
-          "points": 15
-        },
-        {
-          "id": "3.4",
-          "title": "Звуковые эффекты",
-          "description": "Добавь звук при достижении точки B",
-          "hint": "import winsound или pygame.mixer",
-          "code_pattern": "winsound|pygame.mixer|Beep",
-          "points": 15
-        },
-        {
-          "id": "3.5",
-          "title": "Топ-3 рекордов",
-          "description": "Сохраняй и отображай лучшие 3 результата",
-          "hint": "Читай/пиши файл leaderboard.json",
-          "code_pattern": "leaderboard|top.*3",
-          "points": 15
-        }
-      ],
-      "completed": [
-        false,
-        false,
-        false
-      ],
-      "max_points": 45
     }
   }
 }
