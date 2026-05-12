@@ -162,6 +162,7 @@ penalties = 20
 # ----------------------------
 vx = 3
 vy = 3
+boost = 1
 
 # ----------------------------
 # 🟢 РЕЖИМ
@@ -305,9 +306,17 @@ def check_collision():
 # ----------------------------
 # 🟢 УПРАВЛЕНИЕ (БЕЗ ЧЕКПОИНТОВ!)
 # ----------------------------
+def shift_on():
+    global boost
+    boost = 2
+
+def shift_off():
+    global boost
+    boost = 1
+
 def up():
     global steps
-    hero.sety(hero.ycor() + vy)
+    hero.sety(hero.ycor() + vy * boost)
     steps += 1
     
     log.append({
@@ -320,7 +329,7 @@ def up():
 
 def down():
     global steps
-    hero.sety(hero.ycor() - vy)
+    hero.sety(hero.ycor() - vy * boost)
     steps += 1
     
     log.append({
@@ -333,7 +342,7 @@ def down():
 
 def left():
     global steps
-    hero.setx(hero.xcor() - vx)
+    hero.setx(hero.xcor() - vx * boost)
     steps += 1
     
     log.append({
@@ -346,7 +355,7 @@ def left():
 
 def right():
     global steps
-    hero.setx(hero.xcor() + vx)
+    hero.setx(hero.xcor() + vx * boost)
     steps += 1
     
     log.append({
@@ -371,6 +380,8 @@ screen.onkey(down, "s")
 screen.onkey(left, "a")
 screen.onkey(right, "d")
 screen.onkey(reset_session, "r")
+screen.onkeypress(shift_on, "Shift_L")    # Когда левый Shift нажат
+screen.onkeyrelease(shift_off, "Shift_L") # Когда левый Shift отпущен
 
 # ----------------------------
 # 🟢 ОСНОВНОЙ ЦИКЛ
