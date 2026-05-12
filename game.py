@@ -477,6 +477,38 @@ while True:
                 'date': time.strftime("%Y-%m-%d %H:%M:%S")
             }, f, indent=2)
         
+        # --- ДОБАВЛЯЕМ ТОП-3 РЕКОРДОВ ---
+        leaderboard_file = "leaderboard.json"
+        top_records = []
+        
+        # Читаем старые рекорды, если файл уже есть
+        if os.path.exists(leaderboard_file):
+            try:
+                with open(leaderboard_file, "r", encoding="utf-8") as f:
+                    top_records = json.load(f)
+            except:
+                pass
+                
+        # Добавляем наш текущий результат
+        top_records.append({
+            "name": student_name, 
+            "score": final_score, 
+            "time": round(total_time, 2)
+        })
+        
+        # Сортируем (по времени, чем быстрее - тем лучше) и берем только первые 3
+        top_records = sorted(top_records, key=lambda x: x["time"])[:3]
+        
+        # Сохраняем обновленный топ обратно в файл
+        with open(leaderboard_file, "w", encoding="utf-8") as f:
+            json.dump(top_records, f, indent=2, ensure_ascii=False)
+            
+        # Выводим Топ-3 в терминал
+        print("\n🏆 --- ТОП-3 ИГРОКОВ --- 🏆")
+        for i, record in enumerate(top_records):
+            print(f"{i+1}. {record['name']} | Время: {record['time']}с | Счет: {record['score']}")
+        print("--------------------------\n")
+        
         save_log("mission_complete")  # ✅ ОДИН РАЗ В КОНЦЕ!
         break
     
