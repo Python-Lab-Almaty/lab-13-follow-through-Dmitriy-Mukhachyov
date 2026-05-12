@@ -4,6 +4,11 @@ import time
 import hashlib
 import os
 import json
+try:
+    import winsound
+    HAS_SOUND = True
+except ImportError:
+    HAS_SOUND = False
 
 # ----------------------------
 # 🟢 КОНСТАНТЫ
@@ -431,6 +436,10 @@ while True:
     if going_forward and abs(hero.xcor() - goal[0]) < 40 and abs(hero.ycor() - goal[1]) < 40:
         print("🎯 Reached B! RETURN TO A!")
         print(f"🟢 Теперь будут появляться препятствия!")
+        if HAS_SOUND:
+            winsound.Beep(1000, 500)  # Писк 1000 Гц, полсекунды
+        else:
+            print("\a🎵 *ЗВУК ДОСТИЖЕНИЯ ЦЕЛИ* 🎵") # Символ \a вызывает системный звук терминала
         going_forward = False
         hero.color('yellow')
         
